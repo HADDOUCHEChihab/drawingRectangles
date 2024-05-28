@@ -1,5 +1,5 @@
 /**
- * Service handeling rectangles.
+ * Cless handeling rectangles.
  */
 class RectangleService {
   constructor() {
@@ -41,6 +41,17 @@ class RectangleService {
     this.rectangles.forEach((rect) => {
       if (updatedRectangle && rect.id == updatedRectangle.id) {
         rect.isUpdated = true;
+      }
+    });
+  }
+
+  /**
+   * Assign a new color to rectangle.
+   */
+  recolorRectangle(rectangle, color) {
+    this.rectangles.forEach((rect) => {
+      if (rectangle && rect.id == rectangle.id) {
+        rect.color = color;
       }
     });
   }
