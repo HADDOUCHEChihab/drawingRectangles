@@ -30,11 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle mouseUp.
   canvas.addEventListener("mouseup", () => {
     drawingService.endDrawing();
+    drawButton.style.backgroundColor = "#eeeeee";
   });
 
   // Handle mouse when living canvas.
   canvas.addEventListener("mouseleave", () => {
     drawingService.cancelDrawing();
+    drawButton.style.backgroundColor = "#eeeeee";
   });
 
   // Handle double click.
