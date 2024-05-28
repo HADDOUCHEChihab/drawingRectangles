@@ -160,3 +160,25 @@ function rotateRectangle(rectangle, drawingService, rectangleService) {
     }, 10);
   });
 }
+
+/**
+ * Recolor the two smallest rectangles.
+ * @param {RectangleService} rectangleService - The rectangle service instance.
+ * @param {DrawingService} drawingService - The drawing service instance.
+ */
+function recolorRectangles(rectangleService, drawingService) {
+  const rectangles = rectangleService.getRectangles();
+  const twoMinRectangles = rectangles
+    .sort((a, b) => a.area - b.area)
+    .slice(0, 2);
+
+  const color = drawingService.generateRandomColor();
+  twoMinRectangles.forEach((rect) =>
+    rectangleService.recolorRectangle(rect, color)
+  );
+
+  drawingService.clearCanvas();
+  rectangleService
+    .getRectangles()
+    .forEach((rect) => drawingService.drawRectangle(rect));
+}
