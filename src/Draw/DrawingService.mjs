@@ -186,6 +186,36 @@ class DrawingService {
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r},${g},${b})`;
   }
+
+   /**
+   * Rotate a rectangle by a given angle.
+   * @param {*} rectangle
+   * @param {*} angle
+   */
+   rotateRectangle(rectangle, angle) {
+    const centerX = (rectangle.xOrigin + rectangle.xEnd) / 2;
+    const centerY = (rectangle.yOrigin + rectangle.yEnd) / 2;
+    const width = rectangle.width;
+    const height = rectangle.height;
+
+    // Save the current context state
+    this.context.save();
+
+    // Move the origin to the center of the rectangle
+    this.context.translate(centerX, centerY);
+
+    // Apply the rotation
+    this.context.rotate((angle * Math.PI) / 180);
+
+    // Draw the rectangle centered at the origin
+    this.context.fillStyle = rectangle.color;
+    this.context.fillRect(-width / 2, -height / 2, width, height);
+    this.context.lineWidth = rectangle.lineHeight;
+    this.context.strokeStyle = rectangle.lineColor;
+
+    // Restore the context state
+    this.context.restore();
+  }
 }
 
 export default DrawingService;
