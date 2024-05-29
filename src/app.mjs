@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!canvas) {
     throw new Error("Canvas element not found");
   }
-  
+
   // Get services
   const rectangleService = new RectangleService();
   const drawingService = new DrawingService(canvas, rectangleService);
@@ -57,6 +57,27 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () =>
       recolorRectangles(rectangleService, drawingService)
     );
+});
+
+// Handle modal display.
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("instructionModal");
+  const closeModal = document.getElementById("closeModal");
+
+  // Show the modal on page load
+  modal.style.display = "block";
+
+  // Close the modal when the user clicks the close button
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Close the modal when the user clicks anywhere outside of the modal
+  window.addEventListener("click", (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
 });
 
 /**
@@ -102,7 +123,9 @@ function getClickedRectangle(coordX, coordY, rectangleService) {
       const yMin = Math.min(rectangle.yOrigin, rectangle.yEnd);
       const yMax = Math.max(rectangle.yOrigin, rectangle.yEnd);
 
-      return coordX >= xMin && coordX <= xMax && coordY >= yMin && coordY <= yMax;
+      return (
+        coordX >= xMin && coordX <= xMax && coordY >= yMin && coordY <= yMax
+      );
     }) || null
   );
 }
@@ -185,23 +208,3 @@ function recolorRectangles(rectangleService, drawingService) {
     .getRectangles()
     .forEach((rect) => drawingService.drawRectangle(rect));
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("instructionModal");
-  const closeModal = document.getElementById("closeModal");
-
-  // Show the modal on page load
-  modal.style.display = "block";
-
-  // Close the modal when the user clicks the close button
-  closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  // Close the modal when the user clicks anywhere outside of the modal
-  window.addEventListener("click", (event) => {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  });
-});
