@@ -96,13 +96,14 @@ function handleDoubleClick(event, canvas, rectangleService, drawingService) {
 function getClickedRectangle(coordX, coordY, rectangleService) {
   const rectangles = rectangleService.getRectangles();
   return (
-    rectangles.find(
-      (rectangle) =>
-        coordX >= rectangle.xOrigin &&
-        coordX <= rectangle.xEnd &&
-        coordY >= rectangle.yOrigin &&
-        coordY <= rectangle.yEnd
-    ) || null
+    rectangles.find((rectangle) => {
+      const xMin = Math.min(rectangle.xOrigin, rectangle.xEnd);
+      const xMax = Math.max(rectangle.xOrigin, rectangle.xEnd);
+      const yMin = Math.min(rectangle.yOrigin, rectangle.yEnd);
+      const yMax = Math.max(rectangle.yOrigin, rectangle.yEnd);
+
+      return coordX >= xMin && coordX <= xMax && coordY >= yMin && coordY <= yMax;
+    }) || null
   );
 }
 

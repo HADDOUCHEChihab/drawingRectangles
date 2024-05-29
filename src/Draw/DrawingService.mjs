@@ -107,7 +107,7 @@ class DrawingService {
       const width = this.xFinal - this.xOrigin;
       const height = this.yFinal - this.yOrigin;
       const color = this.generateRandomColor();
-      const area = height * width;
+      const area = Math.abs(height) * Math.abs(width);
       const finalRectangle = new Rectangle(
         this.rectangleService.incrementId++,
         this.xOrigin,
@@ -187,12 +187,12 @@ class DrawingService {
     return `rgb(${r},${g},${b})`;
   }
 
-   /**
+  /**
    * Rotate a rectangle by a given angle.
    * @param {*} rectangle
    * @param {*} angle
    */
-   rotateRectangle(rectangle, angle) {
+  rotateRectangle(rectangle, angle) {
     const centerX = (rectangle.xOrigin + rectangle.xEnd) / 2;
     const centerY = (rectangle.yOrigin + rectangle.yEnd) / 2;
     const width = rectangle.width;
