@@ -28,6 +28,33 @@
     <div class="canvas-container">
       <canvas id="rectangles" width="800" height="600"></canvas>
     </div>
+    <div id="instructionModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <h1>Bienvenue sur Drawing Rectangles</h1>
+        <p>
+          Cliquez sur "Ajouter un rectangle"
+          <img
+            id="search-icon"
+            class="search-icon"
+            src="./assets/rectangle-plus.svg"
+            alt="Draw Icon"
+          />
+          pour dessiner un rectangle sur le canvas.
+        </p>
+        <p>
+          Cliquez sur "Changer la couleur"
+          <img
+            id="search-icon"
+            class="search-icon"
+            src="./assets/color-palette.svg"
+            alt="Color Icon"
+          />
+          pour modifier la couleur des deux plus petits réctangles !
+        </p>
+      </div>
+    </div>
+
     <script type="module" src="./src/app.mjs"></script>
   </body>
 </html>

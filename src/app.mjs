@@ -184,3 +184,23 @@ function recolorRectangles(rectangleService, drawingService) {
     .getRectangles()
     .forEach((rect) => drawingService.drawRectangle(rect));
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("instructionModal");
+  const closeModal = document.getElementById("closeModal");
+
+  // Show the modal on page load
+  modal.style.display = "block";
+
+  // Close the modal when the user clicks the close button
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Close the modal when the user clicks anywhere outside of the modal
+  window.addEventListener("click", (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+});
