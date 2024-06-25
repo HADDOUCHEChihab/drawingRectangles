@@ -187,6 +187,26 @@ function rotateRectangle(rectangle, drawingService, rectangleService) {
   });
 }
 
+function findMinDiff(arr, n) {
+  // Initialize difference as infinite.
+  let diff = Number.MAX_VALUE;
+  let minDiffRectangles = [];
+  // Find the min diff by comparing difference.
+  // For all possible pairs in given array.
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (Math.abs(arr[i].area - arr[j].area) <= diff) {
+        // Reintialize diff rectangles array.
+        minDiffRectangles = [];
+        diff = Math.abs(arr[i].area - arr[j].area);
+        minDiffRectangles.push(arr[i], arr[j]);
+      }
+    }
+  }
+  // Return 2 fisrts min diff rectangles.
+  return minDiffRectangles.slice(0, 2);
+}
+
 /**
  * Recolor the two smallest rectangles.
  * @param {RectangleService} rectangleService - The rectangle service instance.
@@ -194,9 +214,7 @@ function rotateRectangle(rectangle, drawingService, rectangleService) {
  */
 function recolorRectangles(rectangleService, drawingService) {
   const rectangles = rectangleService.getRectangles();
-  const twoMinRectangles = rectangles
-    .sort((a, b) => a.area - b.area)
-    .slice(0, 2);
+  const twoMinRectangles = findMinDiff(rectangles, rectangles.length);
 
   const color = drawingService.generateRandomColor();
   twoMinRectangles.forEach((rect) =>
